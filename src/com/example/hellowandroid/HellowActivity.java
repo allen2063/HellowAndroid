@@ -10,9 +10,11 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import java.text.DecimalFormat;
+
 
 public class HellowActivity extends Activity {
 
@@ -65,36 +67,61 @@ public class HellowActivity extends Activity {
 			}else {
 				fieldsuggest.setText(R.string.advice_average);
 			}
-			openOptionsDialog();
+			//openOptionsDialog();
 		}
 		
-		private void openOptionsDialog(){
-			new AlertDialog.Builder(HellowActivity.this)
-			.setTitle(R.string.about_title)
-			.setMessage(R.string.about_msg)
-			.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
-				}
-			})
-			.setNegativeButton(R.string.homepage_label, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// go to url
-					Uri uri = Uri.parse(getString(R.string.homepage_uri));
-					Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-					startActivity(intent);
-					
-				}
-			})
-			.show();
-		}
+		
+		
+		
 	};
 	
+	private void openOptionsDialog(){
+		new AlertDialog.Builder(HellowActivity.this)
+		.setTitle(R.string.about_title)
+		.setMessage(R.string.about_msg)
+		.setPositiveButton(R.string.ok_label, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		})
+		.setNegativeButton(R.string.homepage_label, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// go to url
+				Uri uri = Uri.parse(getString(R.string.homepage_uri));
+				Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+				startActivity(intent);
+				
+			}
+		})
+		.show();
+	}
+
+	protected static final int MENU_ABOUT = Menu.FIRST;
+	protected static final int MENU_QUIT = Menu.FIRST+1;
+	
+		@Override
+		public boolean onCreateOptionsMenu(Menu menu){
+			menu.add(0,MENU_ABOUT,0,"¹ØÓÚ¡­¡­");
+			menu.add(0,MENU_QUIT,0,"½áÊø");
+			return super.onCreateOptionsMenu(menu);
+		} 
+		
+		public boolean onOptionsItemSelected(MenuItem item){
+			switch(item.getItemId()){
+				case MENU_ABOUT:
+					 openOptionsDialog();
+					 break;
+				case MENU_QUIT:
+					 finish();
+					 break;
+			}
+			return super.onOptionsItemSelected(item);
+		}
 	/*
 	private OnClickListener calcBMI = new OnClickListener(){
 		public void onClick(View v){
